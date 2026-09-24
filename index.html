@@ -338,6 +338,51 @@ footer.app-foot{max-width:var(--maxw);margin:0 auto;padding:1.5rem 1rem 3rem;col
 .tl-resizer:hover{background:color-mix(in srgb,var(--gold),transparent 40%)}
 .tl-label .tll{overflow:hidden;text-overflow:ellipsis}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+/* battles & wars view */
+.battle-stats{display:flex;gap:1.1rem;flex-wrap:wrap;align-items:center}
+.battle-stats .stat{font-family:var(--font-serif);font-size:1.5rem;color:var(--accent);font-weight:700}
+.battle-stats .stat small{display:block;font-family:var(--font-sans);font-size:.62rem;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.1em;font-weight:700}
+.battle-bar{display:flex;height:14px;border-radius:7px;overflow:hidden;border:1px solid var(--line-strong);flex:1 1 220px;min-width:180px}
+.battle-bar .seg{display:block;height:100%}
+.bres{font-size:.62rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:.15rem .45rem;border-radius:5px;white-space:nowrap}
+.bres.victory{background:color-mix(in srgb,#2f7a45,transparent 82%);color:#2f7a45;border:1px solid #2f7a45}
+.bres.defeat{background:color-mix(in srgb,#b03c3c,transparent 82%);color:#b03c3c;border:1px solid #b03c3c}
+.bres.draw{background:color-mix(in srgb,#8a7d4a,transparent 82%);color:#8a6f2c;border:1px solid #8a6f2c}
+html[data-theme="dark"] .bres.victory{color:#7fd69a}
+html[data-theme="dark"] .bres.defeat{color:#e88}
+html[data-theme="dark"] .bres.draw{color:#d8c77e}
+.war-head{display:flex;align-items:baseline;gap:.55rem;flex-wrap:wrap}
+.war-meta{font-size:.75rem;color:var(--ink-faint)}
+table.btl{width:100%;border-collapse:collapse;font-size:.82rem}
+table.btl th,table.btl td{border-bottom:1px solid var(--line);padding:.42rem .5rem;text-align:left;vertical-align:top}
+table.btl thead th{background:var(--bg-sunk);font-family:var(--font-serif);border-bottom:1px solid var(--line-strong);white-space:nowrap}
+table.btl tr:last-child td{border-bottom:0}
+.btl .yr{white-space:nowrap;font-family:var(--font-serif);font-weight:600;color:var(--accent);width:5.4rem}
+.btl .loc{font-size:.72rem;color:var(--ink-faint);display:block}
+.btl .njcl{font-size:.74rem;color:var(--ink-faint);font-style:italic;display:block;margin-top:.2rem}
+.gloss-search{width:100%;max-width:420px;padding:.5rem .7rem;border-radius:8px;border:1px solid var(--line-strong);background:var(--bg);color:var(--ink);font-size:.9rem}
+.gloss-cat{border-top:3px solid var(--accent)}
+.gloss-cat h3{color:var(--accent)}
+dl.gloss{margin:0}
+dl.gloss dt{font-family:var(--font-serif);font-weight:700;color:var(--ink);margin-top:.5rem}
+dl.gloss dd{margin:.1rem 0 .35rem;font-size:.84rem;color:var(--ink-soft)}
+dl.gloss dd .njcl{font-size:.74rem;color:var(--ink-faint);font-style:italic;display:block}
+@media(max-width:640px){table.btl .why{display:none}}
+/* quiz */
+.quiz-progress{display:flex;gap:.35rem;flex-wrap:wrap;margin:.4rem 0 .8rem}
+.quiz-progress .qp{width:14px;height:14px;border-radius:3px;background:var(--bg-sunk);border:1px solid var(--line)}
+.quiz-progress .qp.right{background:#2f7a45;border-color:#2f7a45}
+.quiz-progress .qp.wrong{background:#b03c3c;border-color:#b03c3c}
+.quiz-q{font-family:var(--font-serif);font-size:1.25rem;margin:.4rem 0 .9rem;line-height:1.4}
+.quiz-opts{display:grid;gap:.55rem}
+.quiz-opt{text-align:left;padding:.7rem .85rem;border-radius:9px;border:1px solid var(--line-strong);background:var(--bg);color:var(--ink);font-size:.92rem;cursor:pointer;transition:border-color .12s}
+.quiz-opt:hover{border-color:var(--accent)}
+.quiz-opt.correct{background:color-mix(in srgb,#2f7a45,transparent 85%);border-color:#2f7a45}
+.quiz-opt.wrong{background:color-mix(in srgb,#b03c3c,transparent 85%);border-color:#b03c3c}
+.quiz-opt:disabled{cursor:default;opacity:.9}
+.quiz-explain{margin-top:.7rem;padding:.6rem .8rem;border-radius:8px;background:var(--bg-sunk);font-size:.85rem;color:var(--ink-soft)}
+.quiz-meta{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem;color:var(--ink-faint);font-size:.8rem}
 </style>
 <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -368,6 +413,9 @@ footer.app-foot{max-width:var(--maxw);margin:0 auto;padding:1.5rem 1rem 3rem;col
   <nav class="tabs" role="tablist" aria-label="Views">
     <button role="tab" aria-selected="true"  data-view="tree">Family Tree</button>
     <button role="tab" aria-selected="false" data-view="timeline">Timeline</button>
+    <button role="tab" aria-selected="false" data-view="battles">Battles &amp; Wars</button>
+    <button role="tab" aria-selected="false" data-view="glossary">Glossary</button>
+    <button role="tab" aria-selected="false" data-view="quiz">Quiz</button>
     <button role="tab" aria-selected="false" data-view="prep">NJCL Prep</button>
     <button role="tab" aria-selected="false" data-view="cram">Cram Sheet</button>
     <button role="tab" aria-selected="false" data-view="compare">Compare</button>
@@ -414,6 +462,15 @@ footer.app-foot{max-width:var(--maxw);margin:0 auto;padding:1.5rem 1rem 3rem;col
     </div>
     <div class="tl-stage" id="tlStage"></div>
   </section>
+
+  <!-- ============ BATTLES ============ -->
+  <section class="view" id="view-battles" role="tabpanel" aria-label="Battles and wars"></section>
+
+  <!-- ============ GLOSSARY ============ -->
+  <section class="view" id="view-glossary" role="tabpanel" aria-label="Glossary of offices, institutions and terms"></section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="view" id="view-quiz" role="tabpanel" aria-label="Self-test quiz"></section>
 
   <!-- ============ PREP ============ -->
   <section class="view" id="view-prep" role="tabpanel" aria-label="NJCL preparation"></section>
@@ -561,20 +618,34 @@ DATA.prep = {
     {y:"218 BC", name:"Lex Claudia", t:"Barred senators from large-scale overseas trade/shipping."},
     {y:"215 BC", name:"Lex Oppia", t:"Restricted women's display of wealth (later repealed, opposed by Cato)."},
     {y:"180 BC", name:"Lex Villia Annalis", t:"Set minimum ages for the offices of the cursus honorum."},
+    {y:"149 BC", name:"Lex Calpurnia", t:"Created the FIRST standing court (quaestio) — for provincial extortion (repetundae)."},
     {y:"139 BC", name:"Lex Gabinia (ballot)", t:"Introduced the secret ballot for electing magistrates."},
+    {y:"137 BC", name:"Lex Cassia Tabellaria", t:"Extended the secret ballot to jury trials in popular cases."},
     {y:"133 BC", name:"Lex Sempronia Agraria", t:"Tiberius Gracchus's land-redistribution law (max 500 iugera)."},
+    {y:"131 BC", name:"Lex Papiria", t:"Secret ballot for voting on laws."},
     {y:"123 BC", name:"Lex Frumentaria", t:"Gaius Gracchus's grain law fixing a low subsidized grain price."},
     {y:"122 BC", name:"Lex Rubria", t:"Authorized the colony Junonia on the site of Carthage."},
     {y:"122 BC", name:"Lex Acilia", t:"Transferred the extortion courts from the Senate to the equestrians."},
+    {y:"107 BC", name:"Lex Caelia", t:"Secret ballot for treason trials."},
+    {y:"104 BC", name:"Lex Domitia", t:"Transferred election of priests (incl. pontifex maximus) to a popular vote."},
+    {y:"95 BC", name:"Lex Licinia Mucia", t:"Expelled Italians falsely enrolled as citizens — a grievance behind the Social War."},
     {y:"90 BC", name:"Lex Iulia (citizenship)", t:"Granted citizenship to Italians who had not revolted in the Social War."},
     {y:"89 BC", name:"Lex Papiria Plautia", t:"Extended citizenship to allied communities in Italy."},
     {y:"89 BC", name:"Lex Pompeia", t:"Gave Latin rights/citizenship to communities of Cisalpine Gaul."},
     {y:"82 BC", name:"Lex Valeria", t:"Legalized Sulla's dictatorship and proscriptions."},
+    {y:"70 BC", name:"Lex Aurelia Iudiciaria", t:"Split juries three ways: senators, equites, tribuni aerarii — the post-Sullan settlement."},
     {y:"67 BC", name:"Lex Gabinia (pirates)", t:"Gave Pompey a sweeping 3-year command against the pirates."},
+    {y:"67 BC", name:"Lex Roscia Theatralis", t:"Reserved the front 14 theater rows for equestrians."},
     {y:"66 BC", name:"Lex Manilia", t:"Transferred the command against Mithridates VI to Pompey."},
+    {y:"63 BC", name:"Lex Tullia de Ambitu", t:"Cicero's law against electoral bribery."},
     {y:"59 BC", name:"Lex Vatinia", t:"Gave Caesar his 5-year governorship of Gaul/Illyricum."},
+    {y:"58 BC", name:"Lex Clodia (grain)", t:"Clodius' law making the grain dole FREE for citizens; also exiled Cicero and annexed Cyprus."},
     {y:"56 BC", name:"Lex Trebonia", t:"Granted Pompey Spain and Crassus Syria (after the Luca conference)."},
+    {y:"55 BC", name:"Lex Pompeia Licinia", t:"Extended Caesar's Gallic command for 5 more years."},
+    {y:"52 BC", name:"Lex Pompeia de iure magistratuum", t:"Pompey's sole-consulship reform: 5-year gap before provinces; let Caesar stand for consul in absentia."},
+    {y:"45 BC", name:"Lex Iulia Municipalis", t:"Caesar's law regulating municipalities and civic administration in Italy."},
     {y:"43 BC", name:"Lex Titia", t:"Legally established the Second Triumvirate."},
+    {y:"43 BC", name:"Lex Pedia", t:"The Pedian law outlawing Caesar's assassins in absentia."},
     {y:"18 BC", name:"Lex Iulia (marriage)", t:"Augustus's moral legislation on marriage and adultery."}
   ],
   topToKnow:["romulus","numa-pompilius","tullus-hostilius","ancus-marcius","tarquinius-priscus","servius-tullius","tarquinius-superbus","lucius-junius-brutus","cincinnatus","scipio-africanus","cato-the-elder","tiberius-gracchus","gaius-gracchus","gaius-marius","sulla","pompey","crassus","cicero","julius-caesar","brutus","mark-antony","octavian"],
@@ -590,7 +661,17 @@ DATA.prep = {
     {title:"First Triumvirate → Caesar", ids:["pompey","crassus","julius-caesar","cicero","cato-the-younger"],
      note:"Pompey + Crassus + Caesar (60 BC) dominate Rome over the optimates Cicero and Cato; Crassus dies at Carrhae (53), and Pompey and Caesar fall into civil war."},
     {title:"Ides of March → Augustus", ids:["julius-caesar","brutus","cassius","mark-antony","octavian"],
-     note:"Caesar is murdered by Brutus and Cassius (44); the Second Triumvirate (Octavian, Antony, Lepidus) avenges him at Philippi (42); Octavian beats Antony at Actium (31) and becomes Augustus (27)."}
+     note:"Caesar is murdered by Brutus and Cassius (44); the Second Triumvirate (Octavian, Antony, Lepidus) avenges him at Philippi (42); Octavian beats Antony at Actium (31) and becomes Augustus (27)."},
+    {title:"The Aeneid → Romulus line", ids:["aeneas","ascanius","numitor","rhea-silvia","romulus"],
+     note:"Aeneas flees Troy → son Ascanius/Iulus founds Alba Longa → generations later Numitor is king; his daughter Rhea Silvia bears Romulus & Remus by Mars → Romulus founds Rome. Vergil's Aeneid is the charter myth."},
+    {title:"Tribunes & reformers", ids:["tiberius-gracchus","gaius-gracchus","livius-drusus","saturninus"],
+     note:"Tiberius (133) and Gaius Gracchus (123-121) attempt reform; Livius Drusus (91) tries to enfranchise Italians and is murdered; Saturninus (103-100) pushes Marius' veteran colonies — political violence is now routine."},
+    {title:"The road to civil war", ids:["sulla","pompey","crassus","julius-caesar"],
+     note:"Sulla marches on Rome (88 & 82) — the precedent; Pompey & Crassus & Caesar form the First Triumvirate (60); after Crassus dies (53) and Julia dies (54), Pompey and Caesar go to war (49-45)."},
+    {title:"Carthage's end: three generations", ids:["hannibal","cato-the-elder","scipio-aemilianus"],
+     note:"Hannibal nearly destroys Rome (218-201); Cato ends every speech 'Carthago delenda est'; Scipio Aemilianus erases Carthage (146) — a story told in three generations."},
+    {title:"Pompey's extraordinary career", ids:["pompey","sulla","crassus"],
+     note:"Sulla's young general → triumphs over Sertorius → consul 70 (with Crassus) → clears pirates (67, lex Gabinia) → beats Mithridates (66, lex Manilia) → First Triumvirate (60) → sole consul 52 → civil war vs Caesar → dies in Egypt 48."}
   ],
   confusions:[
     {title:"The two Brutuses", body:"<b>Lucius Junius Brutus</b> founded the Republic and expelled the kings in 509 BC (the FIRST consul). <b>Marcus Junius Brutus</b> assassinated Julius Caesar in 44 BC. The later Brutus claimed descent from the elder — both 'tyrant-slayers.'"},
@@ -598,7 +679,17 @@ DATA.prep = {
     {title:"The two Scipios", body:"<b>Scipio Africanus</b> beat Hannibal at Zama (202, 2nd Punic War). <b>Scipio Aemilianus</b> (Africanus' adopted grandson) destroyed Carthage (146, 3rd Punic War) and Numantia. Both called 'Africanus.'"},
     {title:"Marius vs. Sulla", body:"<b>Marius</b> = populares champion, 7× consul, reformed the army (and Caesar's uncle by marriage). <b>Sulla</b> = optimates champion, marched on Rome, dictator with proscriptions, then retired. Bitter rivals whose feud opened the civil wars."},
     {title:"The Gracchi", body:"<b>Tiberius Gracchus</b> (133 BC, land reform, killed first) and his younger brother <b>Gaius Gracchus</b> (123–121 BC, grain law + wider reforms, killed second). Sons of Cornelia, grandsons of Scipio Africanus."},
-    {title:"The First vs. Second Triumvirate", body:"<b>First</b> (60 BC, unofficial): Pompey, Crassus, Caesar. <b>Second</b> (43 BC, official/legal): Octavian, Antony, Lepidus. The first was a private deal; the second a recognized magistracy that proscribed Cicero."}
+    {title:"The First vs. Second Triumvirate", body:"<b>First</b> (60 BC, unofficial): Pompey, Crassus, Caesar. <b>Second</b> (43 BC, official/legal): Octavian, Antony, Lepidus. The first was a private deal; the second a recognized magistracy that proscribed Cicero."},
+    {title:"The two Africani", body:"<b>Scipio Africanus</b> (the elder) beat Hannibal at Zama (202). <b>Scipio Aemilianus</b> (the younger, his adopted grandson) destroyed Carthage (146) and Numantia (133) — he is called 'Africanus Minor' or 'the Younger'."},
+    {title:"The two Lepidi", body:"<b>Marcus Aemilius Lepidus</b> (the triumvir) — Pontifex Maximus, the weak third man of the Second Triumvirate (with Octavian & Antony). His father of the same name was a cavalry commander/proconsul who died 77 BC; don't confuse them."},
+    {title:"Cato the Elder vs. Cato the Younger", body:"<b>Cato the Elder</b> = the stern Censor (184 BC), ended every speech 'Carthago delenda est.' <b>Cato the Younger</b> = his great-grandson, Stoic hero who died at Utica (46 BC) opposing Caesar — the spiritual martyr of the Republic."},
+    {title:"Drusus — father vs son", body:"<b>Marcus Livius Drusus the Elder</b> (tribune 122, allied to the Senate vs. Gaius Gracchus) and <b>Marcus Livius Drusus the Younger</b> (tribune 91 BC, whose assassination for pushing citizenship to Italians triggered the Social War)."},
+    {title:"The two Julius assassins", body:"<b>Gaius Cassius Longinus</b> and <b>Marcus Junius Brutus</b> led the conspiracy; but <b>Decimus Junius Brutus Albinus</b> was the third member of the plot (Caesar's own general) — the 'other Brutus.'"},
+    {title:"Fabius — the Delayer vs the Sacker", body:"<b>Fabius Maximus 'Cunctator'</b> avoided battle with Hannibal. <b>Fabius Maximus Aemilianus</b> (his grandson? son) fought with distinction at Pydna. And <b>Quintus Fabius Maximus Rullianus</b> was a Samnite-War hero — three generations of Fabii."},
+    {title:"The two Licinii", body:"<b>Gaius Licinius Stolo</b> (tribune with Sextius, the Licinio-Sextian laws 367 BC opened the consulship to plebeians) vs. <b>Gaius Licinius Lucullus</b> (Sulla's general, beat Mithridates, famous for luxury dining 'Lucullan feasts')."},
+    {title:"The two Metelli", body:"<b>Quintus Caecilius Metellus Numidicus</b> (Marius's predecessor in Africa, nicknamed Numidicus) vs. <b>Metellus Pius</b> (his son, Sulla's ally, co-consul 80 BC, fought Sertorius)."},
+    {title:"The three Scipios who matter", body:"<b>Scipio Barbatus</b> (the great Samnite-era sarcophagus), <b>Scipio Africanus</b> (Zama), <b>Scipio Aemilianus</b> (destroyed Carthage & Numantia) — three generations all called Scipio."},
+    {title:"Pompey the Great vs. his sons", body:"<b>Pompey Magnus</b> = the triumvir. His sons <b>Gnaeus Pompeius</b> (died Munda 45) and <b>Sextus Pompeius</b> (Sicily sea-power, lasted till 36) carried on the civil war after his death."}
   ],
   chronoNotes:[
     {y:"753 BC", t:"Traditional founding of Rome by Romulus."},
@@ -608,12 +699,28 @@ DATA.prep = {
     {y:"494 BC", t:"First secession of the plebs; the Tribunes of the Plebs are created."},
     {y:"451–450 BC", t:"The Twelve Tables — Rome's first written law code."},
     {y:"390 BC", t:"The Gauls (Brennus) sack Rome; Camillus recovers the city."},
+    {y:"343–341 BC", t:"First Samnite War — Rome clashes with the Samnites over Campania."},
+    {y:"321 BC", t:"Caudine Forks — the Samnites trap and humiliate a Roman army."},
+    {y:"312 BC", t:"Appius Claudius Caecus as censor: builds Via Appia and Aqua Appia."},
+    {y:"295 BC", t:"Sentinum — the decisive battle of the Third Samnite War."},
+    {y:"287 BC", t:"Lex Hortensia: plebiscites now bind everyone — Conflict of the Orders ends."},
+    {y:"280–275 BC", t:"Pyrrhic War — Pyrrhus of Epirus wins 'Pyrrhic victories' then withdraws."},
     {y:"264–241 BC", t:"First Punic War (Sicily; Rome builds its first navy)."},
     {y:"218–201 BC", t:"Second Punic War: Hannibal in Italy; Cannae (216); Zama (202)."},
+    {y:"200–196 BC", t:"Second Macedonian War — Flamininus 'frees' Greece (Isthmian Games)."},
+    {y:"168 BC", t:"Pydna — Aemilius Paullus destroys Macedon; 'empire's end' for the Antigonids."},
+    {y:"149–146 BC", t:"Third Punic War — Scipio Aemilianus destroys Carthage."},
     {y:"146 BC", t:"Carthage AND Corinth destroyed — Rome dominates the Mediterranean."},
     {y:"133 BC", t:"Tiberius Gracchus' tribunate and murder — the Republic's crisis begins."},
+    {y:"123–121 BC", t:"Gaius Gracchus' tribunates and death."},
+    {y:"112–105 BC", t:"Jugurthine War — Metellus Numidicus, then Marius takes over (107)."},
     {y:"107 BC", t:"Marius' first consulship and army reforms."},
+    {y:"102–101 BC", t:"Marius destroys the Teutones (Aquae Sextiae) and Cimbri (Vercellae)."},
+    {y:"91–88 BC", t:"Social War — Italian allies fight for citizenship; lex Iulia/Plautia-Papiria grant it."},
+    {y:"88 BC", t:"Sulla marches on Rome for the first time — the Republic's precedent of civil war."},
     {y:"82–79 BC", t:"Sulla's dictatorship and proscriptions."},
+    {y:"73–71 BC", t:"Spartacus' slave revolt — crucifixions along the Via Appia."},
+    {y:"63 BC", t:"Cicero's consulship; Catiline conspiracy crushed."},
     {y:"60 BC", t:"The First Triumvirate (Pompey, Crassus, Caesar)."},
     {y:"49 BC", t:"Caesar crosses the Rubicon — civil war ('alea iacta est')."},
     {y:"44 BC", t:"The Ides of March: Caesar assassinated by Brutus and Cassius."},
@@ -622,6 +729,99 @@ DATA.prep = {
     {y:"27 BC", t:"Octavian becomes Augustus — the Republic becomes the Empire. — END OF REPUBLIC"}
   ]
 };
+
+/* ---------------------------------------------------------------------------
+   GLOSSARY — offices, assemblies, law & society, military, religion, places
+   --------------------------------------------------------------------------- */
+DATA.glossary = [
+/* --- Magistracies --- */
+{term:"consul", category:"Magistracies", def:"One of TWO annually elected chief magistrates who replaced the king — held imperium, commanded armies, convened the Senate and assemblies. Consuls named the year (consular dating).", njcl:"Always TWO consuls per year; the eponymous magistrates. First pair: Brutus & Collatinus (509 BC)."},
+{term:"praetor", category:"Magistracies", def:"Magistrate holding imperium, ranked below consul; chief judicial officer (praetor urbanus / peregrinus) and army/province commander. Created 366 BC; number grew to 8 by Sulla.", njcl:"2nd in the cursus honorum hierarchy; ran the courts."},
+{term:"dictator", category:"Magistracies", def:"Emergency magistrate appointed (not elected) by a consul on Senate advice for max 6 months — supreme imperium, assisted by a magister equitum. All other magistrates yielded to him.", njcl:"Cincinnatus (458, 16 days), Sulla (82, dictator rei publicae constituendae), Caesar (dictator perpetuo 44)."},
+{term:"magister equitum", category:"Magistracies", def:"'Master of the Horse' — the dictator's hand-picked deputy who commanded the cavalry and exercised delegated imperium.", njcl:"Pairs with dictator — e.g. Titus Aebutius at Lake Regillus."},
+{term:"censor", category:"Magistracies", def:"Two censors elected every ~5 years (a lustrum) for up to 18 months: conducted the census, controlled senatorial rolls (lectio senatus), supervised morals, leased public contracts.", njcl:"Most prestigious office; Cato the Elder (184 BC) the famous stern censor. Could mark a man with nota."},
+{term:"aedile", category:"Magistracies", def:"Magistrate (plebeian aediles 494, curule aediles 367) in charge of the city: markets, streets, buildings, grain supply, and public games (ludi).", njcl:"Curule aedileship was the customary stepping stone to praetor; Caesar dazzled Rome as aedile (65)."},
+{term:"quaestor", category:"Magistracies", def:"Junior magistrate handling finance/treasury (aerarium) and assisting consuls/governors; first step of the cursus honorum; quaestorship gave Senate membership.", njcl:"Bottom of the cursus; minimum age 30 (then ~28 for Sulla's 20 quaestors)."},
+{term:"tribunus plebis", category:"Magistracies", def:"Tribune of the Plebs — 10 elected plebeian officers (created 494 BC) with sacrosanct persons, the veto (intercessio), power to convene the plebs (concilium plebis), and to prosecute.", njcl:"VETO is the signature power; the Gracchi were tribunes. Sacrosanctity made them untouchable."},
+{term:"tribunus militum", category:"Magistracies", def:"Military tribune — officer of a legion; in 444–367 BC, consular powers were sometimes given to military tribunes with consular power (tribuni militum consulari potestate), open to plebeians.", njcl:"The consular tribunate = the patrician workaround before the Licinio-Sextian laws."},
+{term:"interrex", category:"Magistracies", def:"Senator appointed for 5 days to hold elections when no consul/king existed; under the monarchy he nominated the new king.", njcl:"Used in monarchic and republican succession gaps."},
+{term:"decemviri", category:"Magistracies", def:"'Ten men' — the board of 451–450 BC that suspended normal government to write the Twelve Tables; the second decemvirate became tyrannical under Appius Claudius.", njcl:"The decemviri + Twelve Tables (451–450 BC) is a standard question."},
+{term:"legatus", category:"Magistracies", def:"An officer/ambassador holding delegated authority — a general's lieutenant (legatus legionis commanding a legion) or a governor's deputy.", njcl:"Caesar's legates (Labienus, Decimus Brutus) did much of the Gallic fighting."},
+{term:"cursus honorum", category:"Magistracies", def:"The 'course of honors' — the fixed ladder quaestor → (aedile) → praetor → consul, with minimum ages (set by the lex Villia Annalis, 180 BC) and intervals between offices.", njcl:"Marius holding SEVEN consulships and Pompey skipping the ladder entirely were shocking exceptions."},
+{term:"imperium", category:"Magistracies", def:"The bundle of supreme coercive power — command troops, judge capital cases, convene assemblies — vested in consuls, praetors, dictators; symbolized by the fasces carried by lictors.", njcl:"Imperium expired inside the pomerium unless extended (prorogatio); proconsul/propraetor = extended imperium."},
+{term:"lictor / fasces", category:"Magistracies", def:"Attendants carrying the fasces — bundled rods around an axe — symbolizing the magistrate's imperium (24 for a dictator, 12 for a consul, 6 for a praetor).", njcl:"The axe is REMOVED inside Rome — a magistrate cannot execute a citizen inside the pomerium without appeal (provocatio)."},
+{term:"provocatio", category:"Magistracies", def:"The citizen's right of appeal to the people against a magistrate's sentence (beating/death) inside Rome; guaranteed by the Valerian and Porcian laws.", njcl:"The legal shield that ended summary execution of citizens."},
+
+/* --- Assemblies & Senate --- */
+{term:"senatus", category:"Assemblies & Senate", def:"The Senate — ~300 ex-magistrates, nominally advisory (senatus consulta) but in practice steering policy, finance, diplomacy, and command assignments.", njcl:"Patres conscripti; a consultum wasn't 'law' but obedience was expected until the tribunes broke it."},
+{term:"comitia centuriata", category:"Assemblies & Senate", def:"The Centuriate Assembly — voting in 193 centuries weighted to the rich; elected consuls, praetors, censors; declared war; met on the Campus Martius.", njcl:"Wealth-weighted voting — the assembly that made war and chose generals."},
+{term:"comitia tributa", category:"Assemblies & Senate", def:"The Tribal Assembly — voted by 35 tribes; elected quaestors and curule aediles; voted on laws.", njcl:"Geographic tribes (4 urban + 31 rural), not class centuries."},
+{term:"concilium plebis", category:"Assemblies & Senate", def:"The Council of the Plebs — plebeians only, voting by tribes, chaired by a tribune; its resolutions (plebiscita) bound all Romans after the lex Hortensia (287 BC).", njcl:"Plebiscitum = law by plebs alone; the lex Hortensia made it equivalent to statute."},
+{term:"comitia curiata", category:"Assemblies & Senate", def:"The oldest assembly, organized by the 30 curiae; under the Republic mostly formal — ratified adoptions, wills, and the lex curiata de imperio conferring imperium.", njcl:"Archaic survival — the imperium vote still needed it."},
+{term:"comitia / contio", category:"Assemblies & Senate", def:"A contio was a non-voting public meeting where magistrates spoke before a vote; comitia were the voting assemblies proper.", njcl:"Public speeches in the Forum before votes — the arena of oratory."},
+{term:"tribus", category:"Assemblies & Senate", def:"A 'tribe' — a voting district (31 rural + 4 urban); freedmen were confined to urban tribes; membership tied to census registration.", njcl:"The 35 tribes were geography, the centuries were class."},
+{term:"senatus consultum ultimum", category:"Assemblies & Senate", def:"The 'final decree of the Senate' — emergency declaration instructing consuls to see that the state suffered no harm (videant consules ne quid res publica detrimenti capiat); justified martial law.", njcl:"First used against Gaius Gracchus (121); used vs. Catiline (63) and Saturninus (100)."},
+{term:"intercessio", category:"Assemblies & Senate", def:"The veto power of tribunes — could stop a magistrate's act, a Senate decree, or a colleague's motion; central to the plebeian protections.", njcl:"Tiberius Gracchus deposing fellow tribune Octavius (133) showed its limit."},
+
+/* --- Orders & Society --- */
+{term:"patricii", category:"Orders & Society", def:"Patricians — the hereditary aristocracy of the old gentes who monopolized offices and priesthoods until the Conflict of the Orders.", njcl:"Descendants of Romulus' patres (senators)."},
+{term:"plebs", category:"Orders & Society", def:"Plebeians — the non-patrician majority who won offices through secessions and laws (Tribunes 494, Twelve Tables, consulship 367, Hortensia 287).", njcl:"The struggle patricians vs plebs = Conflict of the Orders."},
+{term:"equites", category:"Orders & Society", def:"The equestrian order — the wealthy non-senatorial class (cavalry census rating); became tax-farmers (publicani) and took over the extortion courts under the Gracchi.", njcl:"The 'business class' — publicani ran tax collection."},
+{term:"novus homo", category:"Orders & Society", def:"'New man' — first of a family to reach the consulship (no consular ancestors), e.g. Marius and Cicero.", njcl:"Cicero and Marius are THE novi homines; the nobiles sneered at them."},
+{term:"nobiles", category:"Orders & Society", def:"The nobility — families with consular ancestors who monopolized high office through clientela networks.", njcl:"Marius the novus homo vs the nobiles is a stock contrast."},
+{term:"clientela", category:"Orders & Society", def:"The patron–client bond (fides): patrons gave protection/money/legal help; clients gave votes, escort, loyalty. The engine of Roman politics.", njcl:"Salutatio (morning greeting) and the client's sportula (food basket)."},
+{term:"gens / nomen", category:"Orders & Society", def:"The clan (e.g. gens Julia, gens Cornelia) sharing a nomen; members carried praenomen + nomen + cognomen (e.g. Gaius Julius Caesar).", njcl:"Cornelia gens produced Scipios/Sulla; Julia produced Caesar."},
+{term:"cognomen", category:"Orders & Society", def:"The third name, often an honorific nickname becoming hereditary: Africanus, Numidicus, Macedonicus, Achaicus.", njcl:"Military cognomina celebrate conquest — Scipio AFRICANUS (Africa), Aemilius PAULLUS Macedonicus (Macedon), Lucius MUMMIUS Achaicus (Greece)."},
+{term:"libertus / libertinus", category:"Orders & Society", def:"A freed slave (libertus) owed duties (operae) to his former master as patron; free by manumissio; his sons were freeborn citizens.", njcl:"Freedmen became powerful in trade and the imperial household."},
+{term:"paterfamilias / patria potestas", category:"Orders & Society", def:"The eldest living male's absolute power (even life and death) over descendants; a son in potestate could not own property independently.", njcl:"Brutus executing his sons shows the ideal and the horror."},
+{term:"matrona", category:"Orders & Society", def:"A respectable married woman; Roman matrons (Lucretia, Cornelia) were moral exemplars though legally under guardianship (tutela).", njcl:"Cornelia 'mother of the Gracchi' = the ideal matrona."},
+{term:"secessio plebis", category:"Orders & Society", def:"A 'secession of the plebs' — mass walkout strike where plebeians left Rome (to the Sacred Mount, 494; Aventine/Janiculum) to force patrician concessions.", njcl:"FIVE secessions (494, 449, 445?, 342, 287); each won new rights."},
+{term:"optimates / populares", category:"Orders & Society", def:"The two loose political 'ways': optimates ('best men') ruling through the Senate; populares courting the assemblies/plebs. NOT modern parties.", njcl:"Sulla optimates vs Marius/Caesar populares is THE framing divide of the late Republic."},
+{term:"toga virilis / praetexta", category:"Orders & Society", def:"Boys assumed the plain toga virilis at ~15-16 (taking off the purple-bordered toga praetexta and the bulla amulet).", njcl:"Toga candida (chalk-whitened) = candidate for office — root of 'candidate.'"},
+
+/* --- Law & Constitution --- */
+{term:"lex", category:"Law & Constitution", def:"A statute passed by an assembly (lex) vs. a plebiscitum of the plebs alone; named for proposer(s) (lex Julia, lex Licinia Sextia).", njcl:"Know the big leges — the prep laws table."},
+{term:"mos maiorum", category:"Law & Constitution", def:"'The custom of the ancestors' — unwritten norms that guided law and conduct; Rome's unwritten constitution.", njcl:"Why the Gracchi's innovations shocked conservatives — they broke custom, not law."},
+{term:"ius auxili / provocatio", category:"Law & Constitution", def:"A tribune's duty to aid (auxilium) a plebeian against a magistrate; provocatio = appeal of a sentence to the people.", njcl:"The personal force of the tribunate."},
+{term:"nexum", category:"Law & Constitution", def:"Debt-bondage: a debtor pledged his person to the creditor until debt was paid; the lex Poetelia (326/313 BC) abolished it.", njcl:"Its abolition was the plebs' biggest economic win."},
+{term:"ager publicus", category:"Law & Constitution", def:"Public land won by conquest, nominally for all citizens but farmed by the rich; capped at 500 iugera by law and redistributed by Tiberius Gracchus (133).", njcl:"The land question behind the Gracchi — and the Italian small-farmer's decline."},
+{term:"conubium", category:"Law & Constitution", def:"The legal right to intermarry; denied to plebeians until the lex Canuleia (445 BC).", njcl:"The classic patrician privilege — intermarriage."},
+{term:"proscriptio", category:"Law & Constitution", def:"Proscription — a public death-list: the named lost protection and property; killers rewarded. Invented on a mass scale by Sulla (82 BC), repeated by the Second Triumvirate (43).", njcl:"Cicero was proscribed and murdered in 43 — his head and hands on the Rostra."},
+{term:"triumphus / ovatio", category:"Law & Constitution", def:"A triumph was the Senate-granted procession of a victorious general in the laurelled chariot up to the Capitol; ovatio was the lesser, on foot.", njcl:"Required a victory over a foreign foe — civil-war victories didn't count."},
+{term:"sacerdos / flamen / pontifex", category:"Law & Constitution", def:"Priestly offices: pontifices (college led by the pontifex maximus) oversaw state cult; flamines served single gods (flamen Dialis = Jupiter, with heavy taboos); augurs read omens.", njcl:"Caesar became pontifex maximus 63 BC — the office emperors later kept."},
+{term:"auspicium", category:"Law & Constitution", def:"The auspices — reading the gods' will (birds, lightning, sacred chickens) before public acts; magistrates held the right to take them.", njcl:"Romulus vs Remus' vulture contest = augury; Claudius Pulcher drowned the sacred chickens (249) and lost at Drepana."},
+
+/* --- Military --- */
+{term:"legio", category:"Military", def:"The legion — ~4,200-5,000 infantry divided into maniples (hastati, principes, triarii) under the Republic; cohort organization by Marius's era.", njcl:"Hastati (young) → principes → triarii (veterans with the hasta spear) — 'it has come to the triarii' = desperate."},
+{term:"manipulus / cohors", category:"Military", def:"The maniple (120 men) was the flexible mid-Republican subunit that replaced the phalanx; the cohort (~480) superseded it after Marius.", njcl:"The maniple's flexibility beat the Macedonian phalanx at Cynoscephalae and Pydna."},
+{term:"hastati / principes / triarii", category:"Military", def:"The three manipular lines by experience — young hastati, prime principes, veteran triarii in reserve.", njcl:"Know the order and the triarii proverb."},
+{term:"signum / aquila", category:"Military", def:"Standards: maniples had signa; after Marius the legion's eagle standard (aquila) embodied its honor — its loss was disgrace (Varus at Teutoburg, Crassus at Carrhae).", njcl:"Recovering Carrhae's eagles was a propaganda coup for Augustus."},
+{term:"pilum / gladius", category:"Military", def:"The pilum was the heavy throwing javelin (bent on impact); the gladius hispaniensis the short stabbing sword adopted from Spain.", njcl:"Pila bend so enemies can't throw them back."},
+{term:"centurio", category:"Military", def:"Centurion — career officer commanding a century (~80-100 men); the backbone of the legion's discipline.", njcl:"The centurion's vine staff (vitis) = authority to beat soldiers."},
+{term:"foederati / socii", category:"Military", def:"Italian allies (socii) obliged to supply troops under treaty formulas; their demand for citizenship triggered the Social War (91–88 BC).", njcl:"Socii supplied ~half of Rome's armies — the Social War was about the franchise."},
+{term:"deditio / provincia", category:"Military", def:"Deditio = surrender of a people into Roman faith; provincia = originally a magistrate's 'sphere/assignment,' later a conquered territorial province.", njcl:"Provincia = a job first, a place second — that's the exam trap."},
+
+/* --- Places & Public Works --- */
+{term:"Forum Romanum", category:"Places & Works", def:"The valley square between Palatine and Capitoline — center of law, commerce, politics; contained the Rostra, Curia, Regia, Basilicas.", njcl:"Cloaca Maxima (Tarquin's drain) drained it; the heart of public life."},
+{term:"Curia", category:"Places & Works", def:"The Senate house — the Curia Hostilia (Tullus Hostilius) then Curia Julia (Caesar's rebuilding); later Curia Cornelia/Pompeia where Caesar was killed.", njcl:"Caesar died in Pompey's theater (Curia of Pompey), NOT the Forum proper."},
+{term:"Rostra", category:"Places & Works", def:"The speaker's platform in the Forum, decorated with the rostra (rams/prows) of the Antium ships (338 BC).", njcl:"'Rostrum' = ship's beak — hence the name; Cicero's head & hands displayed here."},
+{term:"pomerium", category:"Places & Works", def:"The sacred boundary of Rome, plowed by Romulus; imperium lapsed inside it — no army or weapons allowed; burial forbidden.", njcl:"Sulla and Caesar crossing it with armies were acts of war."},
+{term:"Capitoline Hill", category:"Places & Works", def:"Rome's religious citadel — temple of Jupiter Optimus Maximus Capitolinus (dedicated 509 BC); the asylum of Romulus; geese of Juno warned of the Gauls (390).", njcl:"Triumphs ended at Jupiter Capitolinus; Tarpeian Rock on its south side = traitors' cliff."},
+{term:"Palatine", category:"Places & Works", def:"The hill where Romulus founded the city; later the emperors' residence — whence 'palace.'", njcl:"Romulus' hill; Remus chose the Aventine."},
+{term:"Via Appia", category:"Places & Works", def:"The 'Queen of Roads' (312 BC, Appius Claudius Caecus) from Rome to Capua, later to Brundisium; lined with tombs.", njcl:"Rome's first great road, by the same Appius who built the Aqua Appia and lost the fleet at Drepana's censor-father — know his name with the blindness legend."},
+{term:"Aqua Appia / Anio Vetus", category:"Places & Works", def:"Rome's first aqueducts (312, 272 BC); Appius Claudius' Aqua Appia was nearly all underground.", njcl:"Roads + aqueducts = the infrastructure the exam pairs with Appius Claudius Caecus."},
+{term:"Servian Wall", category:"Places & Works", def:"The wall attributed to king Servius Tullius enclosing Rome's hills; breached only by invaders (Gauls 390).", njcl:"'Servian' = Servius Tullius, wall + census + tribes = his package."},
+{term:"Templum Iovis Capitolini", category:"Places & Works", def:"The Capitoline Temple of Jupiter Best and Greatest — vowed by Priscus, finished by Superbus, dedicated 509 BC; its three cellae also housed Juno and Minerva.", njcl:"Destiny of Rome's state cult; triumphs processed to it."},
+{term:"Circus Maximus", category:"Places & Works", def:"The great chariot-racing stadium between Palatine and Aventine, laid out under the Tarquins; held the ludi Romani.", njcl:"~250,000 seats under the Empire — the biggest venue in Rome."},
+{term:"Campus Martius", category:"Places & Works", def:"The 'Field of Mars' — muster field for the army and site of the comitia centuriata; outside the pomerium.", njcl:"Why the centuriate assembly met there — soldiers couldn't muster armed inside the pomerium."},
+
+/* --- Key events/rites vocabulary --- */
+{term:"spolia opima", category:"Rites & Honors", def:"'Rich spoils' — the armor a Roman commander took by personally killing an enemy commander. Won only three times: Romulus (Acron), Cossus (Tolumnius), Marcellus (Insubres' king at Clastidium 222).", njcl:"The rarest honor in Roman history — only 3 winners ever."},
+{term:"devotio", category:"Rites & Honors", def:"A general's ritual self-sacrifice in battle to save his army — Decius Mus at Vesuvius (340) and his son at Sentinum (295).", njcl:"The Decii devoted themselves — a famous father-son pair of sacrifices."},
+{term:"fas / nefas", category:"Rites & Honors", def:"Days divided into lawful (fasti) and unlawful (nefasti) for public business — fixed by Numa's calendar work.", njcl:"The calendar governed when assemblies and courts could meet."},
+{term:"ver sacrum", category:"Rites & Honors", def:"'Sacred spring' — a vow dedicating all born in a spring to the gods; explained by the Sabellians' colonizing migrations (the samnite/umbrian origin myth).", njcl:"How Italic peoples explained their spread — picenus, the woodpecker guide, etc."},
+{term:"evocatio", category:"Rites & Honors", def:"The rite 'calling out' a besieged city's tutelary deity, promising it a home at Rome (Veii's Juno, 396).", njcl:"Rome absorbed gods as well as peoples — key to its religious expansion."}
+];
 
 /* ---------------------------------------------------------------------------
    RULERS / STATESMEN  (kings + leading figures of the Republic)
@@ -642,12 +842,12 @@ DATA.emperors = [
   successionType:"Founder-king",
   accessionMethod:"Traditional founder of Rome (753 BC). Raised with his twin Remus by a she-wolf (lupa); after killing Remus in a quarrel over the city's site, he became sole king.",
   deathMethod:"According to legend, vanished in a storm/whirlwind on the Campus Martius and was deified as the god Quirinus (some sources hint he was killed by senators).",
-  keyEvents:["Founds Rome (traditionally 21 April 753 BC) on the Palatine Hill","Kills his twin Remus over the city's walls","The 'Rape of the Sabine Women' to populate the city","War and then union with the Sabines under Titus Tatius"],
-  politicalActions:["Created the original Senate (100 patres) and the patrician class","Divided the people into three tribes and thirty curiae","Established the asylum on the Capitoline to attract settlers"],
-  militaryActions:["Defeated neighboring Latin towns and the Sabines","Created the first Roman army and the celeres (royal bodyguard)"],
-  religiousImportance:["Founded the augural and triumphal traditions","Deified after death as Quirinus, one of Rome's archaic gods"],
-  reforms:["Organized Rome's earliest political divisions (tribes, curiae, Senate)"],
-  geographic:["Walled the Palatine; established the original pomerium (sacred boundary)"],
+  keyEvents:["Founds Rome (traditionally 21 April 753 BC) on the Palatine Hill","Twin-sighting augury: Remus saw 6 vultures, Romulus 12 — Romulus wins the right to found the city","Kills his twin Remus for jumping the new walls ('thus perish all who cross my walls')","Instituted the Consualia festival for Neptune, invited the Sabines — the 'Rape of the Sabine Women' to populate the city","Slew King Acron of Caenina in single combat — won the FIRST spolia opima; dedicated the armor at the new Temple of Jupiter Feretrius (Rome's first temple)","Repelled attacks by Antemnae and Crustumerium; co-ruled with the Sabine Titus Tatius after the women's intervention","War and then union with the Sabines under Titus Tatius","Concluded a 100-year treaty with Veii after defeating Veii and Fidenae","Appeared posthumously to Julius Proculus as the god Quirinus"],
+  politicalActions:["Created the original Senate (100 patres) and the patrician class","Divided the people into three tribes (Ramnes, Tities, Luceres) and thirty curiae","Established the asylum on the Capitoline to attract settlers","Made the Capitoline an asylum for criminals to grow the city","Instituted the twelve lictors carrying the fasces"],
+  militaryActions:["Defeated neighboring Latin towns and the Sabines","Created the first Roman army and the Celeres — a 300-man cavalry bodyguard ('the swift', possibly named for his lieutenant Celer)","Won the first spolia opima over Acron"],
+  religiousImportance:["Founded the augural and triumphal traditions","Consecrated the Temple of Jupiter Feretrius on the Capitol (all later spolia opima went there)","Adopted the foreign rite of sacrifice to Hercules (at the Ara Maxima) — the only foreign rite he kept","Deified after death as Quirinus, one of Rome's archaic gods"],
+  reforms:["Organized Rome's earliest political divisions (tribes, curiae, Senate)","Established the lictors and the three 'centuries' of knights (Ramnes, Tities, Luceres)"],
+  geographic:["Walled the Palatine; established the original pomerium (sacred boundary)","Buried at the Lapis Niger in the Forum"],
   legacy:"The mythic founder and first king of Rome, eponym of the city. His story (the she-wolf, the murder of Remus, the Sabine women) is the foundation legend every Roman knew.",
   njclImportance:"The first king — founder of Rome, the she-wolf, killed Remus, the Rape of the Sabine Women, created the Senate. Founding date 753 BC is essential.",
   memoryHook:"ROMulus → ROMe. The she-wolf twin who killed his brother to found the city.",
@@ -658,7 +858,7 @@ DATA.emperors = [
   sources:["Wikipedia: Romulus","Britannica: Romulus and Remus","Livy, Ab Urbe Condita I","Cary & Scullard, A History of Rome"]
 },
 {
-  id:"numa-pompilius", displayName:"Numa Pompilius", fullName:"Numa Pompilius", alternateNames:[],
+  id:"numa-pompilius", displayName:"Numa Pompilius", fullName:"Numa Pompilius", alternateNames:["the Sabine king"],
   reignStart:-715, reignEnd:-672, accessionYear:-715, deathYear:-672, ageAccession:40, ageDeath:83,
   dynasty:"regal", region:"Regal Rome",
   predecessor:"romulus", successor:"tullus-hostilius", coEmperors:[],
@@ -670,8 +870,8 @@ DATA.emperors = [
   successionType:"Elected by the Senate/people after an interregnum",
   accessionMethod:"A Sabine renowned for piety and wisdom, elected king after Romulus' death following a year-long interregnum.",
   deathMethod:"Died of old age after a long, peaceful reign.",
-  keyEvents:["Reformed the calendar (added January and February; 12 months)","Founded Rome's major priesthoods","Built the Temple of Janus (its doors signaled war or peace)","Said to be guided by the nymph Egeria"],
-  politicalActions:["Organized craftsmen into guilds (collegia) to blunt Sabine–Roman division","A reign of peace — the doors of the Temple of Janus stayed shut"],
+  keyEvents:["Reformed the calendar (added January and February; 12 months)","Founded Rome's major priesthoods","Built the Temple of Janus (its doors signaled war or peace — closed = Rome at peace)","Said to be guided by the nymph Egeria, whom he met in a cave on the Palatine","Established the flamines: flamen Dialis (Jupiter), flamen Martialis (Mars), flamen Quirinalis (Quirinus/Romulus)","Introduced the 12 Salii — leaping priests of Mars carrying the ancilia (sacred shields)","Imported the cult of Vesta from Alba Longa; appointed the Vestal Virgins","Appointed Numa Marcius the first pontifex maximus; consecrated Jupiter Elicius on the Aventine","Fixed the fas/nefas lawful business days; built the Regia (later the pontifex's house)"],
+  politicalActions:["Organized craftsmen into guilds (collegia) to blunt Sabine–Roman division","A reign of peace — the doors of the Temple of Janus stayed shut","His daughter Pompilia was mother of the 4th king, Ancus Marcius; his son Calpus founded the Calpurnian gens"],
   militaryActions:["Fought no wars — famous precisely for peace"],
   religiousImportance:["Created the Vestal Virgins, the Pontifices, the Flamines, the Salii, and the office of Pontifex Maximus","Established Roman religious law and ritual — the architect of Roman state religion"],
   reforms:["Calendar reform; religious and priestly institutions"],
@@ -696,8 +896,8 @@ DATA.emperors = [
   successionType:"Elected king (warlike successor to peaceful Numa)",
   accessionMethod:"Elected as the third king; remembered as the most warlike of the seven.",
   deathMethod:"Said to have been struck dead by a thunderbolt from Jupiter (for botched ritual) — possibly killed by Ancus Marcius in some accounts.",
-  keyEvents:["Destroyed Alba Longa (Rome's mother-city) and moved its people to Rome","The legendary combat of the Horatii (Rome) vs. the Curiatii (Alba Longa)","Built the Curia Hostilia (the Senate house)"],
-  politicalActions:["Doubled Rome's population by absorbing the Albans into the citizenry","Built the original Curia Hostilia — Rome's Senate house, named for him"],
+  keyEvents:["Destroyed Alba Longa (Rome's mother-city) and moved its people to Rome","The legendary combat of the Horatii (Rome) vs. the Curiatii (Alba Longa) — Publius Horatius sole survivor, then killed his sister for mourning the enemy","After victory, had the treacherous Alban leader Mettius Fufetius torn apart by two chariots","Defeated the Sabines at Mantrap Wood","Built the Curia Hostilia (the Senate house) on the slope of the Capitoline","Absorbed the Caelian Hill with the Alban refugees"],
+  politicalActions:["Doubled Rome's population by absorbing the Albans into the citizenry","Built the original Curia Hostilia — Rome's Senate house, named for him","Unlike Romulus and Numa, was a Roman (not Sabine or Etruscan) — grandson of Hostius Hostilius, champion who died fighting the Sabines"],
   militaryActions:["Wars against Alba Longa, Fidenae, and the Sabines","Destruction of Alba Longa after the Alban dictator Mettius Fufetius' treachery"],
   religiousImportance:["Neglected religion (unlike Numa) until plague struck — the legend of his impious end"],
   reforms:[],
@@ -723,7 +923,7 @@ DATA.emperors = [
   successionType:"Elected; grandson of Numa Pompilius",
   accessionMethod:"Grandson of Numa Pompilius; elected fourth king, blending Numa's piety with practical public works and war.",
   deathMethod:"Died of natural causes; his sons were passed over when Tarquinius Priscus took the throne.",
-  keyEvents:["Founded Ostia, Rome's port at the Tiber mouth","Built the first bridge over the Tiber, the Pons Sublicius","Built the Mamertine Prison; extended Rome onto the Janiculum"],
+  keyEvents:["Founded Ostia, Rome's port at the Tiber mouth — salt-works annexed too","Built the first bridge over the Tiber, the Pons Sublicius (all-wood, no iron, maintained by priests)","Built the Mamertine Prison (Tullianum); extended Rome onto the Janiculum","Defeated the Latins and Sabines; absorbed conquered Latin peoples","His mother was Pompilia, daughter of Numa — the Sabine link"],
   politicalActions:["Settled conquered Latins on the Aventine, enlarging the plebs","Codified the religious procedures for declaring war (the fetial rites), reviving Numa's institutions"],
   militaryActions:["Defeated the Latins and extended Roman territory to the sea"],
   religiousImportance:["Revived Numa's neglected religious rites; formalized the fetial law of war"],
@@ -751,8 +951,8 @@ DATA.emperors = [
   successionType:"Etruscan immigrant; elected after Ancus Marcius (with Tanaquil's maneuvering)",
   accessionMethod:"An Etruscan (originally Lucumo of Tarquinii), he moved to Rome with his ambitious wife Tanaquil, became guardian of Ancus' sons, and won election as the fifth king.",
   deathMethod:"Assassinated by agents of the sons of Ancus Marcius; Tanaquil then secured the throne for Servius Tullius.",
-  keyEvents:["First Etruscan king of Rome","Began the Circus Maximus and the great drain, the Cloaca Maxima","Began the Temple of Jupiter Optimus Maximus on the Capitoline","Added 100 members to the Senate (the 'lesser families')"],
-  politicalActions:["Enlarged the Senate; increased the number of equites","Introduced Etruscan royal insignia (the fasces, curule chair, purple toga, the triumph)"],
+  keyEvents:["First Etruscan king of Rome — born Lucumo in Etruscan Tarquinii, son of the Greek Corinthian Demaratus","Rose by the favor of queen Tanaquil, the skilled augur who engineered his election","Began the Circus Maximus and the great drain, the Cloaca Maxima","Began the Temple of Jupiter Optimus Maximus on the Capitoline","Added 100 members to the Senate (the 'lesser families'), doubling it to 200","Conquered the Latins and Sabines; received the omen of the eagle snatching and returning his cap","Murdered by the sons of Ancus Marcius, who resented his accession"],
+  politicalActions:["Enlarged the Senate; increased the number of equites","Introduced Etruscan royal insignia (the fasces, curule chair, purple toga, the triumph, golden crown)","His wife Tanaquil orchestrated the smooth accession of Servius Tullius"],
   militaryActions:["Victories over the Latins and Sabines"],
   religiousImportance:["Began the great Capitoline Temple of Jupiter Optimus Maximus"],
   reforms:["Etruscan symbols of power adopted into Roman magistracy (fasces, triumph)"],
@@ -779,8 +979,8 @@ DATA.emperors = [
   successionType:"Raised by Tanaquil to the throne after Priscus' murder (no election)",
   accessionMethod:"Reared in the palace; after Priscus was assassinated, Tanaquil concealed the death and installed Servius — the only king to take power without a formal election.",
   deathMethod:"Murdered in a coup by his son-in-law Tarquinius Superbus and his own daughter Tullia, who drove her carriage over his body (the 'Vicus Sceleratus,' Street of Crime).",
-  keyEvents:["Built the Servian Wall around Rome","Instituted the census and the comitia centuriata (citizens ranked by wealth)","Organized citizens into property classes for military and voting purposes"],
-  politicalActions:["Created the centuriate assembly (comitia centuriata), basing political/military rank on a wealth census","Extended citizenship and reorganized the city's tribes"],
+  keyEvents:["Built the Servian Wall around Rome's seven hills","Instituted the census and the comitia centuriata (citizens ranked by wealth into 193 centuries)","Organized citizens into property classes for military and voting purposes — 'timocratic' reform","Tradition said he was a slave-born protege (Ocrisia's son; flame-around-the-head omen) raised by Tanaquil","Married his daughters to the sons of Tarquinius Priscus — one, the wicked Tullia, conspired with Tarquinius Superbus","Murdered by agents of his son-in-law Tarquinius Superbus; Tullia drove her carriage over his body in the Vicus Sceleratus"],
+  politicalActions:["Created the centuriate assembly (comitia centuriata), basing political/military rank on a wealth census","Extended citizenship and reorganized the city's tribes","His Servian constitution made military burden & political power proportional to wealth — wealth replaced birth as the basis of the state"],
   militaryActions:["Reorganized the army by property classes (the basis of the later legion)"],
   religiousImportance:["Built/expanded the Temple of Diana on the Aventine, a Latin League shrine"],
   reforms:["The census and the Servian constitution — the wealth-based class and century system","The Servian organization of citizen voting and military service"],
@@ -807,8 +1007,8 @@ DATA.emperors = [
   successionType:"Seized the throne by murdering Servius Tullius",
   accessionMethod:"Took power by assassinating his father-in-law Servius Tullius in a palace coup, then ruled without the consent of the Senate or people — hence 'Superbus,' the Proud.",
   deathMethod:"Expelled from Rome in 509 BC after his son Sextus raped Lucretia; died in exile at Cumae (c. 495 BC) after failing to retake the city (the war with Lars Porsena and the Battle of Lake Regillus).",
-  keyEvents:["Completed the Temple of Jupiter Optimus Maximus","His son Sextus' rape of Lucretia triggered the revolution","Expelled in 509 BC — END OF THE MONARCHY","The Sibylline Books were acquired in his reign"],
-  politicalActions:["Ruled tyrannically, ignoring the Senate and executing rivals","His overthrow created the consulship and the Republic (with a hatred of 'rex' that lasted centuries)"],
+  keyEvents:["Completed the Temple of Jupiter Optimus Maximus on the Capitoline (dedicated 509 BC, just after his fall)","His son Sextus' rape of Lucretia triggered the revolution led by Brutus and Collatinus","Took Gabii by the trick of his son Sextus faking defection — 'the tallest poppies' story","Expelled in 509 BC — END OF THE MONARCHY","The Sibylline Books were acquired in his reign — he bought the last three at the full price after the Sibyl burned six","Waged war on Ardea; the siege there gave the context for Lucretia's rape"],
+  politicalActions:["Ruled tyrannically, ignoring the Senate and executing rivals","His overthrow created the consulship and the Republic (with a hatred of 'rex' that lasted centuries)","Killed the top senators and substituted his own; refused burial honors to Servius Tullius"],
   militaryActions:["Wars against the Volsci and Latins; later (in exile) allied with Lars Porsena of Clusium and the Latins (Lake Regillus, c. 496)"],
   religiousImportance:["Completed the great Capitoline temple; the Sibylline Books tradition"],
   reforms:[],
@@ -2736,6 +2936,270 @@ function renderPrep(){
 }
 
 /* ============================================================================
+   5d2. RENDER — BATTLES & WARS
+   ============================================================================ */
+const RESULT_STYLE = {victory:["Victory","#2f7a45"],defeat:["Defeat","#b03c3c"],draw:["Indecisive","#8a6f2c"]};
+function renderBattles(){
+  const B = (DATA.battles||[]).slice().sort((a,b)=>a.year-b.year);
+  if (!B.length){ $("#view-battles").innerHTML = `<div class="section-intro"><h2>Battles &amp; Wars</h2><p>No battle data loaded.</p></div>`; return; }
+  const v = B.filter(b=>b.result==="victory").length,
+        l = B.filter(b=>b.result==="defeat").length,
+        d = B.filter(b=>b.result==="draw").length;
+  // wars in chronological order of their first battle
+  const warOrder = [], byWar = {};
+  B.forEach(b => { const w = b.war||"Other"; if (!byWar[w]){ byWar[w]=[]; warOrder.push(w); } byWar[w].push(b); });
+  const eraOf = w => (byWar[w][0] && byWar[w][0].era) || "";
+  const rows = b => `<tr>
+    <td class="yr">${esc(fmtYear(b.year))}</td>
+    <td><strong>${esc(b.name)}</strong>${b.location?`<span class="loc">${esc(b.location)}</span>`:""}</td>
+    <td><span class="bres ${b.result}">${esc(RESULT_STYLE[b.result]?.[0]||b.result)}</span></td>
+    <td>${esc(b.roman||"—")}<br><span class="muted" style="font-size:.74rem">vs. ${esc(b.enemy||"—")}</span></td>
+    <td class="why">${esc(b.significance||"")}${b.njcl?`<span class="njcl">★ ${esc(b.njcl)}</span>`:""}</td>
+  </tr>`;
+  const warCards = warOrder.map(w => {
+    const list = byWar[w], d0 = dyn(eraOf(w));
+    const yrs = list.map(x=>x.year), rng = `${fmtYear(Math.min(...yrs))} – ${fmtYear(Math.max(...yrs))}`;
+    const wv = list.filter(x=>x.result==="victory").length, wl = list.filter(x=>x.result==="defeat").length;
+    return `<div class="card accentL" style="border-left-color:${d0.color}">
+      <h3 class="war-head">${esc(w)}
+        <span class="chip" style="background:${d0.color};color:#fff;border-color:transparent;cursor:default">${esc(d0.label)}</span>
+        <span class="war-meta">${list.length} battle${list.length>1?"s":""} · ${rng} · ${wv}W/${wl}L</span></h3>
+      <table class="btl"><thead><tr><th>Year</th><th>Battle</th><th>Result</th><th>Rome vs.</th><th>Why it matters</th></tr></thead>
+      <tbody>${list.map(rows).join("")}</tbody></table>
+    </div>`;
+  }).join("");
+  const total = B.length, pv = Math.round(v/total*100), pl = Math.round(l/total*100), pd = 100-pv-pl;
+  $("#view-battles").innerHTML = `
+    <div class="section-intro">
+      <h2>Battles &amp; Wars — Monarchy &amp; Republic</h2>
+      <p>Every major battle of the Monarchy and Republic, grouped by war and era. <em>Result is from Rome's point of view.</em> Click era chips in the filter bar to narrow the wars.</p>
+    </div>
+    <div class="card accentL"><div class="battle-stats">
+      <span class="stat">${total}<small>Battles</small></span>
+      <span class="stat" style="color:#2f7a45">${v}<small>Victories</small></span>
+      <span class="stat" style="color:#b03c3c">${l}<small>Defeats</small></span>
+      <span class="stat" style="color:#8a6f2c">${d}<small>Indecisive</small></span>
+      <span class="battle-bar" title="Record: ${pv}% victory / ${pl}% defeat / ${pd}% indecisive">
+        <span class="seg" style="width:${pv}%;background:#2f7a45"></span><span class="seg" style="width:${pl}%;background:#b03c3c"></span><span class="seg" style="width:${pd}%;background:#8a6f2c"></span>
+      </span>
+    </div></div>
+    <div class="grid">${warCards}</div>`;
+}
+
+/* ============================================================================
+   5d3. RENDER — GLOSSARY
+   ============================================================================ */
+const GLOSS_Q = "";
+function renderGlossary(){
+  const G = DATA.glossary||[];
+  if (!G.length){ $("#view-glossary").innerHTML = `<div class="section-intro"><h2>Glossary</h2><p>No glossary data loaded.</p></div>`; return; }
+  const cats = [];
+  G.forEach(g => { if (!cats.includes(g.category)) cats.push(g.category); });
+  const catCards = cats.map(c => {
+    const items = G.filter(g => g.category===c);
+    return `<div class="card gloss-cat" data-cat="${esc(c)}"><h3>${esc(c)}</h3>
+      <dl class="gloss">${items.map(g => `
+        <dt>${esc(g.term)}</dt><dd>${esc(g.def)}${g.njcl?`<span class="njcl">★ ${esc(g.njcl)}</span>`:""}</dd>`).join("")}</dl>
+    </div>`;
+  }).join("");
+  $("#view-glossary").innerHTML = `
+    <div class="section-intro">
+      <h2>Glossary — Offices, Institutions &amp; Terms</h2>
+      <p>The vocabulary of the Monarchy and Republic: magistracies, assemblies, legal and social terms — the stuff certamen questions are literally made of.</p>
+      <p style="margin-top:.5rem"><input class="gloss-search" id="glossSearch" type="search" placeholder="Filter terms…" aria-label="Filter glossary terms"></p>
+    </div>
+    <div class="grid cols-2">${catCards}</div>`;
+  const inp = $("#glossSearch");
+  if (inp) inp.addEventListener("input", () => {
+    const q = inp.value.trim().toLowerCase();
+    $$(".gloss-cat", $("#view-glossary")).forEach(card => {
+      let any = false;
+      $$("dt", card).forEach(dt => {
+        const dd = dt.nextElementSibling;
+        const hit = !q || (dt.textContent+" "+(dd?dd.textContent:"")).toLowerCase().includes(q);
+        dt.style.display = hit?"":"none"; if (dd) dd.style.display = hit?"":"none";
+        any = any || hit;
+      });
+      card.style.display = any?"":"none";
+    });
+  });
+}
+
+/* ============================================================================
+   5d4. RENDER — QUIZ (self-test)
+   ============================================================================ */
+const QUIZ = {qs:[], i:0, score:0, results:[]};
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function sample(a,n){ return shuffle(a.slice()).slice(0,n); }
+function uniqBy(arr, key){ const s=new Set(); return arr.filter(x=>{const k=key(x); if(s.has(k)) return false; s.add(k); return true;}); }
+
+function buildQuestions(){
+  const Q = [];
+  const emps = DATA.emperors.filter(e=>e.inNjclCoreScope!==false);
+  const ppl  = DATA.people||[];
+  const named = emps.concat(ppl.filter(p=>p.njclNote||p.bio));
+
+  // 1. Who-was-questions from roles/bios
+  emps.filter(e=>e.role || e.njclImportance).forEach(e=>{
+    const clue = e.role || e.njclImportance;
+    Q.push({
+      q:`Which figure: ${clue.length>140?clue.slice(0,140)+'…':clue}`,
+      answer:e.displayName,
+      options:sample(named.filter(n=>n.id!==e.id),3).map(n=>n.displayName).concat(e.displayName),
+      explain:`${e.displayName} — ${dyn(e.dynasty).label}. ${e.njclImportance||e.bio||''}`
+    });
+  });
+
+  // 2. Dynasty questions
+  emps.forEach(e=>{
+    Q.push({
+      q:`${e.displayName} belonged to which era/dynasty?`,
+      answer:dyn(e.dynasty).label,
+      options:sample(DATA.dynasties.filter(d=>d.key!==e.dynasty),3).map(d=>d.label).concat(dyn(e.dynasty).label),
+      explain:`${e.displayName}: ${dyn(e.dynasty).label} — ${fmtReign(e)}.`
+    });
+  });
+
+  // 3. Successor / predecessor
+  emps.filter(e=>e.successor && byId(e.successor)).forEach(e=>{
+    Q.push({
+      q:`Who succeeded ${e.displayName}?`,
+      answer:byId(e.successor).displayName,
+      options:sample(named.filter(n=>n.id!==e.id && n.id!==e.successor),3).map(n=>n.displayName).concat(byId(e.successor).displayName),
+      explain:`${e.displayName} → ${byId(e.successor).displayName}.`
+    });
+  });
+  emps.filter(e=>e.predecessor && byId(e.predecessor)).forEach(e=>{
+    Q.push({
+      q:`Who preceded ${e.displayName}?`,
+      answer:byId(e.predecessor).displayName,
+      options:sample(named.filter(n=>n.id!==e.id && n.id!==e.predecessor),3).map(n=>n.displayName).concat(byId(e.predecessor).displayName),
+      explain:`${byId(e.predecessor).displayName} → ${e.displayName}.`
+    });
+  });
+
+  // 4. Year questions (reign start)
+  emps.filter(e=>e.reignStart!=null && e.isMajor).forEach(e=>{
+    const yr = e.reignStart;
+    const fmt = y => y<0?`${-y} BC`:`AD ${y}`;
+    const wrongs = [yr-1,yr+1,yr+2,yr-2,yr+10,yr-10,yr+100].filter(w=>w!==yr);
+    Q.push({
+      q:`In what year did ${e.displayName}'s reign begin?`,
+      answer:fmt(yr),
+      options:sample(wrongs,3).map(fmt).concat(fmt(yr)),
+      explain:`${e.displayName} reigned ${fmtReign(e)}.`
+    });
+  });
+
+  // 5. Battles
+  (DATA.battles||[]).forEach(b=>{
+    const others = sample((DATA.battles||[]).filter(x=>x.id!==b.id),3);
+    if (b.enemy) Q.push({
+      q:`The Battle of ${b.name} (${fmtYear(b.year)}) was fought against which enemy?`,
+      answer:b.enemy,
+      options:others.map(o=>o.enemy).filter(Boolean).concat(b.enemy),
+      explain:`${b.name}: ${b.significance||''}`
+    });
+    if (b.roman) Q.push({
+      q:`Who commanded Rome at ${b.name} (${fmtYear(b.year)})?`,
+      answer:b.roman,
+      options:sample(named,3).map(n=>n.displayName).concat(b.roman),
+      explain:`${b.name} — ${b.significance||''}`
+    });
+  });
+
+  // 6. Glossary
+  (DATA.glossary||[]).forEach(g=>{
+    const others = sample((DATA.glossary||[]).filter(x=>x.term!==g.term),3);
+    Q.push({
+      q:`What is a '${g.term}'?`,
+      answer:g.def,
+      options:others.map(o=>o.def).concat(g.def),
+      explain:`${g.term}: ${g.def}`
+    });
+  });
+
+  // 7. Laws
+  (DATA.prep.laws||[]).forEach(l=>{
+    const others = sample(DATA.prep.laws.filter(x=>x.name!==l.name),3);
+    Q.push({
+      q:`What did the ${l.name} (${l.y}) do?`,
+      answer:l.t,
+      options:others.map(o=>o.t).concat(l.t),
+      explain:`${l.name}: ${l.t}`
+    });
+  });
+
+  return shuffle(uniqBy(Q.filter(q=>q.options.length>=4 && new Set(q.options).size>=4), x=>x.q));
+}
+
+function renderQuiz(){
+  const v = $("#view-quiz");
+  if (!QUIZ.qs.length){
+    v.innerHTML = `
+      <div class="section-intro">
+        <h2>Quiz — self-test like certamen</h2>
+        <p>Random multiple-choice questions generated from this app's dataset — people, eras, dates, battles, glossary, and laws. Answer, see the explanation, continue.</p>
+      </div>
+      <div class="card accentL" style="max-width:560px">
+        <h3>Start a round</h3>
+        <p class="muted">How many questions?</p>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.5rem">
+          <button class="toggle" data-qz="10">10</button>
+          <button class="toggle" data-qz="20">20</button>
+          <button class="toggle" data-qz="40">40 (full exam)</button>
+        </div>
+      </div>`;
+    $$("[data-qz]", v).forEach(b=>b.addEventListener("click",()=>{
+      QUIZ.qs = sample(buildQuestions(), +b.dataset.qz);
+      QUIZ.i = 0; QUIZ.score = 0; QUIZ.results = [];
+      renderQuiz();
+    }));
+    return;
+  }
+  if (QUIZ.i >= QUIZ.qs.length){
+    const pct = Math.round(QUIZ.score/QUIZ.qs.length*100);
+    const wrongs = QUIZ.results.map((r,ix)=>!r?`<li><strong>Q${ix+1}.</strong> ${esc(QUIZ.qs[ix].q)}<br><span class="muted">Answer: ${esc(QUIZ.qs[ix].answer)} — ${esc(QUIZ.qs[ix].explain||'')}</span></li>`:"").join("");
+    v.innerHTML = `
+      <div class="section-intro"><h2>Quiz complete</h2></div>
+      <div class="card accentL" style="max-width:560px">
+        <div class="battle-stats">
+          <span class="stat" style="color:${pct>=70?'#2f7a45':'#b03c3c'}">${pct}%<small>Score</small></span>
+          <span class="stat">${QUIZ.score}/${QUIZ.qs.length}<small>Correct</small></span>
+        </div>
+        <p style="margin-top:.8rem"><button class="toggle" id="qzAgain">Play again</button></p>
+      </div>
+      ${wrongs?`<div class="card"><h3>Review your misses</h3><ol style="font-size:.85rem">${wrongs}</ol></div>`:''}`;
+    $("#qzAgain", v)?.addEventListener("click",()=>{QUIZ.qs=[];renderQuiz();});
+    return;
+  }
+  const q = QUIZ.qs[QUIZ.i];
+  const opts = shuffle(q.options.slice());
+  v.innerHTML = `
+    <div class="card" style="max-width:680px;margin:0 auto">
+      <div class="quiz-meta"><span>Question ${QUIZ.i+1} / ${QUIZ.qs.length}</span><span>Score: ${QUIZ.score}</span></div>
+      <div class="quiz-progress">${QUIZ.qs.map((_,i)=>`<span class="qp ${QUIZ.results[i]===true?'right':QUIZ.results[i]===false?'wrong':''}"></span>`).join("")}</div>
+      <div class="quiz-q">${esc(q.q)}</div>
+      <div class="quiz-opts">${opts.map(o=>`<button class="quiz-opt" data-o="${esc(o)}">${esc(o)}</button>`).join("")}</div>
+      <div id="qzExplain"></div>
+    </div>`;
+  $$(".quiz-opt", v).forEach(b=>b.addEventListener("click",()=>{
+    const sel = b.dataset.o;
+    const right = sel === q.answer;
+    QUIZ.results[QUIZ.i] = right;
+    if (right) QUIZ.score++;
+    $$(".quiz-opt", v).forEach(x=>{
+      x.disabled = true;
+      if (x.dataset.o===q.answer) x.classList.add("correct");
+      if (x===b && !right) x.classList.add("wrong");
+    });
+    $("#qzExplain", v).innerHTML = `<div class="quiz-explain"><strong>${right?'Correct.':'Answer: '+esc(q.answer)}</strong> ${esc(q.explain||'')}</div>
+      <p style="margin-top:.7rem"><button class="toggle" id="qzNext">${QUIZ.i+1<QUIZ.qs.length?'Next →':'Finish'}</button></p>`;
+    $("#qzNext", v).addEventListener("click",()=>{QUIZ.i++;renderQuiz();});
+  }));
+}
+
+/* ============================================================================
    5e. RENDER — CRAM SHEET
    ============================================================================ */
 function renderCram(){
@@ -3191,6 +3655,9 @@ function renderAll(){
   renderLegend();
   renderTree();
   renderTimeline();
+  renderBattles();
+  renderGlossary();
+  renderQuiz();
   renderPrep();
   renderCram();
   renderCompare();
