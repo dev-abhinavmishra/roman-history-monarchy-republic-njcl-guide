@@ -3630,7 +3630,7 @@ function renderBattles(){
   $("#view-battles").innerHTML = `
     <div class="section-intro">
       <h2>Battles &amp; Wars — Monarchy &amp; Republic</h2>
-      <p>Every major battle of the Monarchy and Republic, grouped by war and era. <em>Result is from Rome's point of view.</em> Click era chips in the filter bar to narrow the wars.</p>
+      <p>Every major battle of the Monarchy and Republic, grouped by war and era. <em>Result is from Rome's point of view.</em></p>
     </div>
     <div class="card accentL"><div class="battle-stats">
       <span class="stat">${total}<small>Battles</small></span>
@@ -3759,7 +3759,7 @@ function buildQuestions(){
       explain:`${b.name}: ${b.significance||''}`
     });
     if (b.roman) Q.push({
-      q:`Who commanded Rome at ${/^battle of /i.test(b.name)?'the ':''}${b.name.replace(/\s*\(\s*\d+\s*(BC|AD|BCE|CE)?\s*\)\s*$/i,'')} (${fmtYear(b.year)})?`,
+      q:`Who commanded Rome at ${/^(battle|siege|sack|fall|capture|storming|massacre|destruction) of /i.test(b.name)?'the ':''}${b.name.replace(/\s*\(\s*\d+\s*(BC|AD|BCE|CE)?\s*\)\s*$/i,'')} (${fmtYear(b.year)})?`,
       answer:b.roman,
       options:sample(named,3).map(n=>n.displayName).concat(b.roman),
       explain:`${b.name} — ${b.significance||''}`
@@ -3770,7 +3770,7 @@ function buildQuestions(){
   (DATA.glossary||[]).forEach(g=>{
     const others = sample((DATA.glossary||[]).filter(x=>x.term!==g.term),3);
     Q.push({
-      q:`What is a '${g.term}'?`,
+      q:`What is ${/^[aeiou]/i.test(g.term)?'an':'a'} '${g.term}'?`,
       answer:g.def,
       options:others.map(o=>o.def).concat(g.def),
       explain:`${g.term}: ${g.def}`
