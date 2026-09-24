@@ -164,7 +164,7 @@ main{max-width:var(--maxw);margin:0 auto;padding:0 1rem 4rem}
   overflow:hidden;height:74vh;min-height:460px;cursor:grab;touch-action:none
 }
 .tree-stage.grabbing{cursor:grabbing}
-.tree-zoom{position:absolute;right:.6rem;bottom:.6rem;display:flex;flex-direction:column;gap:.3rem;z-index:6}
+.tree-zoom{position:absolute;right:.6rem;top:.6rem;display:flex;flex-direction:column;gap:.3rem;z-index:6}
 .tree-zoom button{width:34px;height:34px;border-radius:8px;border:1px solid var(--line-strong);background:var(--bg-panel);color:var(--ink);font-size:1.1rem;font-weight:700;cursor:pointer;box-shadow:var(--shadow-sm)}
 #treeSvg{position:absolute;top:0;left:0;transform-origin:0 0}
 .node{cursor:pointer}
@@ -384,7 +384,7 @@ dl.gloss dd .njcl{font-size:.74rem;color:var(--ink-faint);font-style:italic;disp
 .quiz-explain{margin-top:.7rem;padding:.6rem .8rem;border-radius:8px;background:var(--bg-sunk);font-size:.85rem;color:var(--ink-soft)}
 .quiz-meta{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem;color:var(--ink-faint);font-size:.8rem}
 /* era strip */
-.era-strip{display:flex;gap:2px;height:52px;margin:.5rem 0}
+.era-strip{display:flex;gap:2px;height:52px;margin:.5rem 0;overflow-x:auto;padding-bottom:2px}
 .era-seg{position:relative;background:var(--accent);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:0 .45rem;min-width:44px}
 .era-seg.ext{background:var(--accent2,#8a6f2c)}
 .era-seg.adv{background:#6b5b8a}
