@@ -1427,7 +1427,7 @@ DATA.emperors = [
   spouses:["Sempronia (sister of the Gracchi)"], children:[],
   adoptiveParents:["Publius Cornelius Scipio (son of Africanus) — adopted into the Scipio family"], adoptiveHeirs:[],
   notableRelatives:["Aemilius Paullus (father)","Scipio Africanus (adoptive grandfather)","Sempronia (wife)","the Gracchi (brothers-in-law)"],
-  maritalLinks:["sempronia"], biologicalLinks:[], adoptiveLinks:[],
+  maritalLinks:["sempronia"], biologicalLinks:["aemilius-paullus"], adoptiveLinks:["scipio-elder"],
   successionType:"Consul (147, 134 BC); destroyer of Carthage and Numantia",
   accessionMethod:"Born a son of Aemilius Paullus, adopted into the Scipio family; elected consul (147 BC) by special dispensation to finish the Third Punic War.",
   deathMethod:"Found dead in 129 BC under suspicious circumstances, after opposing the Gracchan land program — possibly murdered.",
@@ -1453,7 +1453,7 @@ DATA.emperors = [
   father:"Lucius Aemilius Paullus (died at Cannae, 216)", mother:null,
   spouses:["Papiria"], children:["Scipio Aemilianus (adopted out to the Scipios)","Fabius Maximus Aemilianus (adopted out to the Fabii)"], adoptiveParents:[], adoptiveHeirs:[],
   notableRelatives:["Scipio Aemilianus (son)"],
-  maritalLinks:[], biologicalLinks:["scipio-aemilianus"], adoptiveLinks:[],
+  maritalLinks:[], biologicalLinks:["scipio-aemilianus","aemilius-paullus-cannae"], adoptiveLinks:[],
   successionType:"Consul (182, 168 BC); conqueror of Macedon",
   accessionMethod:"Twice consul; given command in the Third Macedonian War.",
   deathMethod:"Died 160 BC; his lavish triumph was darkened by the deaths of his two youngest sons.",
@@ -1669,7 +1669,7 @@ DATA.emperors = [
   father:"Marcus Porcius Cato", mother:"Livia",
   spouses:["Atilia","Marcia"], children:["Porcia (married Brutus)"], adoptiveParents:[], adoptiveHeirs:[],
   notableRelatives:["Cato the Elder (great-grandfather)","Servilia (half-sister)","Brutus (nephew & son-in-law)","Porcia (daughter, Brutus' wife)"],
-  maritalLinks:[], biologicalLinks:["porcia"], adoptiveLinks:[], associateLinks:["julius-caesar"],
+  maritalLinks:[], biologicalLinks:["porcia","cato-the-elder","servilia"], adoptiveLinks:[], associateLinks:["julius-caesar"],
   successionType:"Tribune, praetor; the incorruptible Stoic optimate",
   accessionMethod:"Rose through the offices as the Senate's most rigid defender of Republican tradition and the bitterest enemy of Caesar.",
   deathMethod:"After Caesar's victory at Thapsus, committed suicide at UTICA (46 BC) rather than live under Caesar's rule or accept his pardon — the Stoic martyr of the Republic.",
@@ -3016,12 +3016,15 @@ const PAD_TOP = 30, PAD_BOT = 60, PAD_LEFT = 26, DYN_GAP = 46, ROOT_GAP = 0.5;
 // layout. The Monarchy forms the Tarquin web; the Republic forms the famous
 // late-Republican family network (Scipios/Gracchi, Julii, Catones/Bruti).
 const GENEALOGY = {
-  // Monarchy (the Tarquin / royal house)
+  // Monarchy (the Tarquin / royal house + the Romulus legend)
   "ancus-marcius":["numa-pompilius"],
   "servius-tullius":["tarquinius-priscus"], "tarquinius-superbus":["tarquinius-priscus"],
-  "tullia":["servius-tullius"], "remus":["romulus"],
+  "tullia":["servius-tullius"],
+  "amulius":["proca"], "numitor":["proca"], "rhea-silvia":["numitor"],
+  "romulus":["rhea-silvia"], "remus":["rhea-silvia"],
   // Punic-war / Gracchan family (Scipios + Aemilii + Gracchi)
   "cornelia":["scipio-africanus"], "scipio-aemilianus":["aemilius-paullus"],
+  "aemilius-paullus":["aemilius-paullus-cannae"],
   "tiberius-gracchus":["cornelia"], "gaius-gracchus":["cornelia"], "sempronia":["cornelia"],
   // Caesar / Julian + Catones / Bruti
   "julia-caesaris":["julius-caesar"], "octavian":["julius-caesar"],
@@ -3030,7 +3033,7 @@ const GENEALOGY = {
 // structural parent links that are adoptions/foster ties (drawn dashed-gold)
 const ADOPT = new Set(["octavian>julius-caesar","servius-tullius>tarquinius-priscus"]);
 // notable cross-family adoptions to draw without affecting layout
-const EXTRA_ADOPT = [];
+const EXTRA_ADOPT = [["scipio-aemilianus","scipio-elder"],["romulus","faustulus"],["remus","faustulus"]];
 // curated real marriages between dataset nodes (drawn as marriage links)
 const SPOUSES = [
   // Monarchy
@@ -3122,7 +3125,7 @@ function renderTree(){
     const rowOf = {}, colOf = {}, occ = new Set();
     const take = (r,c)=>occ.add(r+","+c), isFree = (r,c)=> r>=0 && !occ.has(r+","+c);
     rulers.forEach((n,i)=>{ rowOf[n.id]=i; colOf[n.id]=0; take(i,0); });
-    let maxRow = Math.max(0, rulers.length-1);
+    let maxRow = Math.max(0, rulers.length-1), minRow = 0;
     const sideLoad = {L:0, R:0};
     let pend = people.slice(), guard = 0;
     while (pend.length && guard++ < 80){
@@ -3146,19 +3149,48 @@ function renderTree(){
         for (const [r,c] of cells){ if (isFree(r,c)){ rowOf[p.id]=r; colOf[p.id]=c; take(r,c); maxRow=Math.max(maxRow,r); if(c>0)sideLoad.R++; else sideLoad.L++; done=true; break; } }
         if (!done){ const c = (sideLoad.R<=sideLoad.L?1:-1); rowOf[p.id]=++maxRow; colOf[p.id]=c; take(maxRow,c); if(c>0)sideLoad.R++; else sideLoad.L++; }
       }
-      if (still.length === pend.length){     // remainder w/o same-era anchor: stack by time, alternating sides
-        chronoSort(still).forEach((p,i)=>{ const c = (i%2)? 1 : -1; rowOf[p.id]=++maxRow; colOf[p.id]=c; take(maxRow,c); });
+      if (still.length === pend.length){     // remainder w/o same-era anchor: place by date
+        // interpolate each figure's year against the ruler spine — earlier than
+        // the first ruler lands above it (negative rows), later below, between
+        // rulers proportionally. Rows may go negative; minRow offsets them later.
+        const rY = rulers.map(n => yr(n));
+        const vRow = Y => {
+          if (!rY.length) return ++maxRow;
+          if (Y <= rY[0]) return (Y - rY[0]) / 25;
+          const last = rY.length - 1;
+          if (Y >= rY[last]) return last + (Y - rY[last]) / 25;
+          for (let i = 0; i < last; i++) if (Y <= rY[i+1])
+            return i + (Y - rY[i]) / Math.max(1, rY[i+1] - rY[i]);
+          return last;
+        };
+        chronoSort(still).forEach(p => {
+          const t = Math.round(vRow(yr(p)));
+          let spot = null;
+          for (let dr = 0; dr <= 12 && !spot; dr++){
+            const rows = dr ? [t-dr, t+dr] : [t];
+            for (const r of rows){
+              for (const c of [0,1,-1,2,-2,3,-3,4,-4]){
+                if (!occ.has(r+","+c)){ spot = [r,c]; break; }
+              }
+              if (spot) break;
+            }
+          }
+          const [r,c] = spot || [++maxRow, (sideLoad.R<=sideLoad.L?1:-1)];
+          rowOf[p.id]=r; colOf[p.id]=c; take(r,c);
+          if (r>maxRow) maxRow=r; if (r<minRow) minRow=r;
+          if(c>0)sideLoad.R++; else if(c<0)sideLoad.L++;
+        });
         pend = []; break;
       }
       pend = still;
     }
     mem.forEach(n => {
-      const col = colOf[n.id]||0, row = rowOf[n.id]||0;
+      const col = colOf[n.id]||0, row = (rowOf[n.id]||0) - minRow;
       if (col < gMinCol) gMinCol = col;
       if (col > gMaxCol) gMaxCol = col;
       meta[n.id] = { col, row, laneTop };
     });
-    const blockH = maxRow*ROW_H + NODE_H;
+    const blockH = (maxRow - minRow)*ROW_H + NODE_H;
     laneSpan[d.key] = { headerY: yAcc, top: laneTop, bottom: laneTop + blockH };
     yAcc = laneTop + blockH + DYN_GAP;
   });
@@ -3215,11 +3247,14 @@ function renderTree(){
 
   // ---- connectors: orthogonal parent→child elbows + spouse lines ----
   let edgeSvg = "";
+  const pairKey = (a,b) => [a,b].sort().join("|");
+  const drawnPairs = new Set();     // pairs already drawn — data-link pass skips them
   const elbow = (px,pB,cx,cT,busY,color,dash) =>
     `<path class="edge" fill="none" stroke="${color}" stroke-width="2" ${dash?`stroke-dasharray="${dash}"`:""} d="M ${px} ${pB} V ${busY} H ${cx} V ${cT}"/>`;
   nodes.forEach(n => {
     const ps = (GENEALOGY[n.id]||[]).filter(p => positions[p]);
     if (!ps.length) return;
+    ps.forEach(p => drawnPairs.add(pairKey(n.id,p)));
     const px = ps.reduce((s,p)=>s+positions[p].cx,0)/ps.length;
     const pB = Math.max(...ps.map(p => positions[p].y + NODE_H));
     const c = positions[n.id];
@@ -3229,18 +3264,33 @@ function renderTree(){
   });
   EXTRA_ADOPT.forEach(([ci,pi]) => {
     if (!positions[ci] || !positions[pi]) return;
+    drawnPairs.add(pairKey(ci,pi));
     const p = positions[pi], c = positions[ci];
     const pB = p.y + NODE_H, busY = (pB + c.y) / 2;
     edgeSvg += elbow(p.cx, pB, c.cx, c.y, busY, "#c79a2e", "6 4");
   });
   const mseen = new Set();
   nodes.forEach(n => (spouseMap[n.id]||[]).filter(has).forEach(s => {
-    const k = [n.id,s].sort().join("|"); if (mseen.has(k)) return; mseen.add(k);
+    const k = pairKey(n.id,s); if (mseen.has(k)) return; mseen.add(k); drawnPairs.add(k);
     const a = positions[n.id], b = positions[s]; if (!a||!b) return;
     const x1 = a.cx < b.cx ? a.x+NODE_W : a.x;
     const x2 = a.cx < b.cx ? b.x : b.x+NODE_W;
     edgeSvg += `<path class="edge" fill="none" stroke="#5a6fb0" stroke-width="1.8" stroke-dasharray="2 3" d="M ${x1} ${a.cy} L ${x2} ${b.cy}"/>`;
   }));
+
+  // ---- remaining kinship edges from the data link fields ----
+  nodes.forEach(n => {
+    const a = positions[n.id]; if (!a) return;
+    const drawF = (targets, color, dash) => (targets||[]).forEach(t => {
+      const m = byId(t); if (!m || !has(t) || t === n.id) return;
+      const k = pairKey(n.id, t); if (drawnPairs.has(k)) return; drawnPairs.add(k);
+      const b = positions[t]; if (!b) return;
+      edgeSvg += `<path class="edge" fill="none" stroke="${color}" stroke-width="1.7" stroke-dasharray="${dash}" d="M ${a.cx} ${a.cy} L ${b.cx} ${b.cy}"/>`;
+    });
+    drawF(n.biologicalLinks, "#2e8b57", "5 3");
+    drawF(n.adoptiveLinks,   "#c79a2e", "3 4");
+    drawF(n.maritalLinks,    "#5a6fb0", "2 4");
+  });
 
   // ---- associate / advisor / rival / faction links (kept local to an era) ----
   const aseen = new Set();
